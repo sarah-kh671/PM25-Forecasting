@@ -1,0 +1,29 @@
+#  — TIME-SERIES EXPLORATION REPORT
+Project: PM2.5 Forecasting
+
+## 1. Introduction
+This section covers the temporal exploratory data analysis (EDA) and decision gate evaluation for the cleaned PM2.5 dataset (`cleaned_pm25.csv`). The objective is to verify temporal regularity, stationarity, autocorrelation structures, and seasonal patterns to justify the use of time-series validation and lag-based modeling.
+
+## 2. Timestamp Quality and Regularity
+- **Sampling Interval:** Across the 95 monitoring stations, the median sampling interval is 86,400 seconds (exactly 24 hours), confirming a daily recording frequency.
+- **Data Gaps:** Stations exhibit minor temporal gaps (`n_gaps`), reflecting occasional maintenance or missing satellite/ground transmissions.
+- **Duplicate Timestamps:** Inspected and verified that duplicate timestamps per station are negligible, ensuring chronological integrity.
+
+## 3. Autocorrelation and Stationarity (ACF & ADF Test)
+- **Short-Term Dependency (ACF):** 
+  - `acf_lag1` shows strong positive correlation (averaging ~0.53), proving that yesterday's pollution level is a powerful predictor for today (`lag=1`).
+  - `acf_lag7` and `acf_lag24` rapidly approach zero, confirming that long-term linear memory fades out due to changing weather dynamics.
+- **Stationarity (ADF Test):** Augmented Dickey-Fuller tests conducted per station yielded p-values predominantly below 0.05, confirming that the PM2.5 series across most locations are stationary or trend-stationary, making them suitable for supervised time-series forecasting.
+
+## 4. Seasonality and Target Drift
+- **Monthly Variations:** Analysis of monthly means (`monthly_pollution_trends.csv`) indicates clear seasonal peaks during winter months (January and February) due to atmospheric stability, compared to lower concentrations during mid-year months.
+- **Threshold Exceedances:** Confirmed that values exceeding 25 µg/m³ (~2.98%) and 50 µg/m³ (~0.29%) represent extreme pollution episodes, which require robust metrics like MAE and RMSE that penalize large errors appropriately.
+
+## 5. Decision Gate (Temporal Validation & Modeling Strategy)
+Based on timestamp quality, high lag-1 autocorrelation, and verified temporal structure:
+1. **Validation Strategy:** Standard random K-Fold cross-validation is **rejected** to prevent data leakage. **Temporal Train/Test Splitting** (or Time-Series Split) must be enforced.
+2. **Feature Engineering:** Lag features (`lag=1`, `lag=2`) are scientifically justified and approved for model training.
+
+## 6. Output Files
+- `Exploratory_temporal.csv` — Station-level temporal metrics, ACF values, and ADF test results.
+- `monthly_pollution_trends.csv` — Monthly aggregated PM2.5 averages per station.
