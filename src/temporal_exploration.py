@@ -28,7 +28,7 @@ def longest_run(s):
     return max((r for _, r in runs), key=len, default=pd.Series(dtype=float))
 
 
-def run_temporal_eda(input_path="data/cleaned_pm25.csv", output_path="results/Exploratory_temporal.csv"):
+def run_temporal_eda(input_path="data/processed/cleaned_pm25.csv", output_path="results/Exploratory_temporal.csv"):
     print("Loading cleaned data...")
     df = pd.read_csv(input_path)
 

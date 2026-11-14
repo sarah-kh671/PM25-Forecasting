@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # 1. LOAD DATASET
 # ==========================================
 
-df = pd.read_csv("data/cleaned_pm25.csv")
+df = pd.read_csv("data/processed/cleaned_pm25.csv")
 
 os.makedirs("results/histograms", exist_ok=True)
 os.makedirs("results/boxplots", exist_ok=True)
