@@ -1,0 +1,7 @@
+GENERAL DATA EXPLORATION - ANALYSIS LIMITATIONS
+
+This script calculates descriptive statistics, missing values, exact duplicate rows, IQR potential outliers, histograms, boxplots, Pearson and Spearman correlations, and PM2.5 threshold counts.
+
+The following analyses are not calculated here: Isolation Forest, Local Outlier Factor (LOF), VIF, statistical p-values, ACF, PACF, ADF stationarity tests, sentinel-value validation, and full data lineage/leakage verification. These should remain unreported until they are completed and verified.
+
+IQR flags identify unusual values; they do not prove that values are incorrect and do not justify automatic deletion.
