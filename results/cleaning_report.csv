@@ -1,7 +1,0 @@
-Item,Count
-Original rows,41718
-Missing PM2.5,0
-PM2.5 <= 0,727
-PM2.5 >= 500,8
-Removed rows,735
-Remaining rows,40983
